@@ -107,15 +107,15 @@ function PricingCard({ plan, index }: { plan: PricingPlan; index: number }) {
 
   return (
     <motion.div
-      className={`relative flex flex-col rounded-xl p-6 md:p-8 ${
+      className={`card-gradient-border relative flex flex-col p-6 md:p-8 ${
         isHighlighted
-          ? "scale-100 border-2 border-gold bg-navy-light shadow-xl md:scale-105"
-          : "border border-border-dark bg-navy-light/50"
+          ? "card-gradient-border-highlighted md:scale-105"
+          : ""
       }`}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      initial={{ opacity: 0, y: 24, filter: "blur(4px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
     >
       {isHighlighted && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">

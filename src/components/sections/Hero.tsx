@@ -15,7 +15,8 @@ const reassurance = [
 export default function Hero() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-navy hero-pattern">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 px-4 pt-28 pb-16 md:flex-row md:gap-8 md:px-6 md:pt-36 md:pb-24">
+      <div className="hero-glow" aria-hidden="true" />
+      <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center gap-12 px-4 pt-28 pb-16 md:flex-row md:gap-8 md:px-6 md:pt-36 md:pb-24">
         <HeroContent />
         <HeroVisual />
       </div>
@@ -27,15 +28,15 @@ function HeroContent() {
   return (
     <motion.div
       className="flex-[3] text-center md:text-left"
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
       <Badge text="Sites livrés en 5 jours" />
 
       <h1 className="font-playfair text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
         Votre site internet professionnel,{" "}
-        <span className="text-gold">livré clé en main</span>
+        <span className="text-gradient-gold">livré clé en main</span>
       </h1>
 
       <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-light">

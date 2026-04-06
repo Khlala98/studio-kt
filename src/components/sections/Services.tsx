@@ -79,11 +79,11 @@ export default function Services() {
 function HighlightCard({ service }: { service: Service }) {
   return (
     <motion.div
-      className="relative overflow-hidden rounded-xl border-2 border-gold bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-lg md:p-8"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      className="card-gradient-border-light relative overflow-hidden p-6 shadow-[0_20px_60px_-20px_rgba(212,167,74,0.3)] md:p-8"
+      initial={{ opacity: 0, y: 24, filter: "blur(4px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ scale: 1.02 }}
     >
       <div className="absolute right-4 top-4">
@@ -108,11 +108,11 @@ function HighlightCard({ service }: { service: Service }) {
 function ServiceCard({ service, index }: { service: Service; index: number }) {
   return (
     <motion.div
-      className="rounded-xl border border-border bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-lg"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
+      className="card-gradient-border-light p-6 shadow-sm"
+      initial={{ opacity: 0, y: 24, filter: "blur(4px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ scale: 1.02 }}
     >
       <ServiceIcon icon={service.icon} />

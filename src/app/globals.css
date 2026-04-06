@@ -5,9 +5,9 @@
   --font-playfair: var(--font-playfair);
   --font-sans: var(--font-dm-sans);
 
-  --color-navy: #09090b;
-  --color-navy-light: #18181b;
-  --color-navy-medium: #27272a;
+  --color-navy: #050510;
+  --color-navy-light: #0a0a1a;
+  --color-navy-medium: #12121f;
 
   --color-gold: #d4a74a;
   --color-gold-light: #e8c97a;
@@ -16,7 +16,7 @@
   --color-bg-main: #fafbfe;
   --color-bg-alt: #f0f2f8;
 
-  --color-text: #09090b;
+  --color-text: #050510;
   --color-text-muted: #475569;
   --color-text-light: #94a3b8;
 
@@ -29,7 +29,7 @@
   --color-success: #16a34a;
 }
 
-/* Skip to content */
+/* ---------- Skip to content ---------- */
 .skip-to-content {
   position: absolute;
   top: -100%;
@@ -48,41 +48,268 @@
   top: 0;
 }
 
-/* Smooth scroll */
+/* ---------- Smooth scroll ---------- */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
 }
 
 body {
+  position: relative;
   font-family: var(--font-dm-sans), system-ui, sans-serif;
   background: var(--color-bg-main);
   color: var(--color-text);
 }
 
-/* Hero geometric pattern */
-.hero-pattern {
-  background-image:
-    linear-gradient(rgba(212, 167, 74, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(212, 167, 74, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
+/* ---------- Effect 1 : Subtle noise grain overlay ---------- */
+/* Fixed, non-interactive, very low opacity. Disabled on mobile for perf. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-/* Navbar backdrop */
-.navbar-scrolled {
-  background: rgba(9, 9, 11, 0.95);
+@media (max-width: 768px) {
+  body::after {
+    display: none;
+  }
+}
+
+/* ---------- Effect 2 : Hero gold + violet ambient glow ---------- */
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 60% 50% at 30% 30%,
+      rgba(212, 167, 74, 0.08) 0%,
+      rgba(212, 167, 74, 0) 60%
+    ),
+    radial-gradient(
+      ellipse 45% 40% at 80% 85%,
+      rgba(100, 50, 200, 0.05) 0%,
+      rgba(100, 50, 200, 0) 70%
+    );
+}
+
+@media (max-width: 768px) {
+  .hero-glow {
+    background:
+      radial-gradient(
+        ellipse 80% 40% at 50% 25%,
+        rgba(212, 167, 74, 0.06) 0%,
+        rgba(212, 167, 74, 0) 65%
+      );
+  }
+}
+
+/* ---------- Effect 5 : Hero animated dot grid ---------- */
+.hero-pattern {
+  position: relative;
+}
+
+.hero-pattern::before {
+  content: "";
+  position: absolute;
+  inset: -40px 0 0 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+    circle,
+    rgba(212, 167, 74, 0.22) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+  opacity: 0.18;
+  mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  animation: hero-drift 20s linear infinite;
+}
+
+@keyframes hero-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-32px);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-pattern::before {
+    animation: none;
+    opacity: 0.1;
+  }
+}
+
+/* ---------- Effect 4 : Animated section divider ---------- */
+.section-divider {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 167, 74, 0.4) 50%,
+    transparent 100%
+  );
+}
+
+.section-divider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(232, 201, 122, 0.6) 50%,
+    transparent 100%
+  );
+  filter: blur(2px);
+  opacity: 0.5;
+}
+
+/* ---------- Effect 6 : Gradient text (gold → gold-light) ---------- */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #d4a74a 0%, #e8c97a 60%, #d4a74a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ---------- Effect 3 : Gradient-border cards ---------- */
+/* For dark-background cards (Pricing etc.) */
+.card-gradient-border {
+  position: relative;
+  background: rgba(18, 18, 31, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  border-radius: 0.75rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Focus visible */
+.card-gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(212, 167, 74, 0.25) 0%,
+    rgba(212, 167, 74, 0.05) 50%,
+    rgba(212, 167, 74, 0.2) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: background 0.3s ease;
+}
+
+.card-gradient-border:hover::before {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 167, 74, 0.55) 0%,
+    rgba(232, 201, 122, 0.25) 50%,
+    rgba(212, 167, 74, 0.5) 100%
+  );
+}
+
+.card-gradient-border-highlighted::before {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 167, 74, 0.7) 0%,
+    rgba(232, 201, 122, 0.4) 50%,
+    rgba(212, 167, 74, 0.6) 100%
+  );
+}
+
+.card-gradient-border-highlighted {
+  box-shadow:
+    0 0 0 1px rgba(212, 167, 74, 0.15),
+    0 0 40px rgba(212, 167, 74, 0.08),
+    0 20px 40px -20px rgba(0, 0, 0, 0.6);
+}
+
+/* For light-background cards (Services etc.) */
+.card-gradient-border-light {
+  position: relative;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-gradient-border-light::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(212, 167, 74, 0.35) 0%,
+    rgba(226, 232, 240, 1) 50%,
+    rgba(212, 167, 74, 0.3) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: background 0.3s ease;
+}
+
+.card-gradient-border-light:hover::before {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 167, 74, 0.8) 0%,
+    rgba(232, 201, 122, 0.5) 50%,
+    rgba(212, 167, 74, 0.75) 100%
+  );
+}
+
+.card-gradient-border-light:hover {
+  box-shadow: 0 20px 40px -20px rgba(212, 167, 74, 0.25);
+}
+
+/* ---------- Effect 8 : Gold glow button ---------- */
+.btn-glow-gold {
+  transition: box-shadow 0.35s ease, transform 0.2s ease;
+}
+
+.btn-glow-gold:hover {
+  box-shadow:
+    0 0 0 1px rgba(212, 167, 74, 0.4),
+    0 0 20px rgba(212, 167, 74, 0.35),
+    0 0 40px rgba(212, 167, 74, 0.2);
+}
+
+/* ---------- Navbar backdrop ---------- */
+.navbar-scrolled {
+  background: rgba(5, 5, 16, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(212, 167, 74, 0.08);
+}
+
+/* ---------- Focus visible ---------- */
 *:focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* Scrollbar */
+/* ---------- Scrollbar ---------- */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -98,4 +325,14 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-gold);
+}
+
+/* ---------- Reduce motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-pattern::before {
+    animation: none;
+  }
+  * {
+    scroll-behavior: auto !important;
+  }
 }

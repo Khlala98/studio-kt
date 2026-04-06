@@ -6,7 +6,7 @@ import type { ButtonVariant } from "@/types";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-gold text-navy font-semibold hover:bg-gold-light shadow-sm hover:shadow-lg",
+    "bg-gold text-navy font-semibold hover:bg-gold-light shadow-sm btn-glow-gold",
   secondary:
     "border-2 border-gold text-gold font-semibold hover:bg-gold hover:text-navy",
   ghost:
