@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4a74a"/>
+      <stop offset="60%" stop-color="#e8c97a"/>
+      <stop offset="100%" stop-color="#d4a74a"/>
+    </linearGradient>
+    <radialGradient id="glowGold" cx="30%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#d4a74a" stop-opacity="0.18"/>
+      <stop offset="70%" stop-color="#d4a74a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowViolet" cx="85%" cy="85%" r="50%">
+      <stop offset="0%" stop-color="#6432c8" stop-opacity="0.12"/>
+      <stop offset="70%" stop-color="#6432c8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#d4a74a" fill-opacity="0.12"/>
+    </pattern>
+  </defs>
+
+  <!-- Base background -->
+  <rect width="1200" height="630" fill="#050510"/>
+
+  <!-- Dot grid -->
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Gold glow -->
+  <rect width="1200" height="630" fill="url(#glowGold)"/>
+
+  <!-- Violet glow -->
+  <rect width="1200" height="630" fill="url(#glowViolet)"/>
+
+  <!-- Top accent line -->
+  <line x1="100" y1="120" x2="1100" y2="120" stroke="#d4a74a" stroke-opacity="0.35" stroke-width="1"/>
+  <line x1="400" y1="120" x2="800" y2="120" stroke="#e8c97a" stroke-opacity="0.6" stroke-width="1"/>
+
+  <!-- Badge "Sites livrés en 5 jours" -->
+  <g transform="translate(600, 200)">
+    <rect x="-130" y="-22" width="260" height="44" rx="22" fill="#d4a74a" fill-opacity="0.1" stroke="#d4a74a" stroke-opacity="0.35" stroke-width="1"/>
+    <text x="0" y="6" font-family="DM Sans, system-ui, sans-serif" font-size="16" font-weight="600" fill="#d4a74a" text-anchor="middle" letter-spacing="1.5">
+      SITES LIVRÉS EN 5 JOURS
+    </text>
+  </g>
+
+  <!-- Studio KT main title -->
+  <text x="600" y="340" font-family="Playfair Display, Georgia, serif" font-size="128" font-weight="700" fill="url(#goldGradient)" text-anchor="middle">
+    Studio KT
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="420" font-family="DM Sans, system-ui, sans-serif" font-size="32" font-weight="400" fill="#e2e8f0" text-anchor="middle">
+    Votre site internet professionnel,
+  </text>
+  <text x="600" y="462" font-family="DM Sans, system-ui, sans-serif" font-size="32" font-weight="600" fill="#e8c97a" text-anchor="middle">
+    livré clé en main
+  </text>
+
+  <!-- Bottom accent line -->
+  <line x1="100" y1="530" x2="1100" y2="530" stroke="#d4a74a" stroke-opacity="0.35" stroke-width="1"/>
+  <line x1="400" y1="530" x2="800" y2="530" stroke="#e8c97a" stroke-opacity="0.6" stroke-width="1"/>
+
+  <!-- Domain footer -->
+  <text x="600" y="580" font-family="DM Sans, system-ui, sans-serif" font-size="20" font-weight="500" fill="#94a3b8" text-anchor="middle" letter-spacing="2">
+    studiokt.fr
+  </text>
+</svg>

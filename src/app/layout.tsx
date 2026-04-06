@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.svg",
         width: 1200,
         height: 630,
         alt: "Studio KT — Sites internet professionnels",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     title: "Studio KT — Sites internet professionnels",
     description:
       "Sites vitrines modernes, livrés clé en main en 5 jours. Sans abonnement.",
-    images: ["/og-image.png"],
+    images: ["/og-image.svg"],
   },
 };
 
