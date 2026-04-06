@@ -15,11 +15,11 @@ export const siteConfig: SiteConfig = {
     { label: "Contact", href: "#contact" },
   ],
   services: [
-    "Sites vitrines",
-    "Landing pages",
-    "Refonte de sites",
-    "Optimisation SEO",
-    "Maintenance web",
+    "Sites Web",
+    "Applications SaaS",
+    "Automatisations & IA",
+    "Outils Internes",
+    "Intégrations API",
   ],
   demos: [
     { title: "Restaurant Le Gourmet", category: "Restaurant" },

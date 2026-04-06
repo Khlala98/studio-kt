@@ -8,9 +8,9 @@ const config: Config = {
     extend: {
       colors: {
         navy: {
-          DEFAULT: "#0f1629",
-          light: "#1a2138",
-          medium: "#243055",
+          DEFAULT: "#09090b",
+          light: "#18181b",
+          medium: "#27272a",
         },
         gold: {
           DEFAULT: "#d4a74a",
@@ -20,14 +20,14 @@ const config: Config = {
         "bg-main": "#fafbfe",
         "bg-alt": "#f0f2f8",
         text: {
-          DEFAULT: "#0f1629",
+          DEFAULT: "#09090b",
           muted: "#475569",
           light: "#94a3b8",
         },
         "gray-light": "#cbd5e1",
         border: {
           DEFAULT: "#e2e8f0",
-          dark: "rgba(212,167,74,0.15)",
+          dark: "rgba(212,167,74,0.12)",
         },
         white: "#f8fafc",
         success: "#16a34a",
