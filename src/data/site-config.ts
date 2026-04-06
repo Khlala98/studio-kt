@@ -8,11 +8,12 @@ export const siteConfig: SiteConfig = {
   whatsapp: "33622763533",
   whatsappUrl: "https://wa.me/33622763533",
   navLinks: [
-    { label: "Services", href: "#services" },
-    { label: "Formules", href: "#formules" },
-    { label: "Processus", href: "#processus" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Contact", href: "#contact" },
+    { label: "Services", href: "/#services" },
+    { label: "Formules", href: "/#formules" },
+    { label: "Processus", href: "/#processus" },
+    { label: "FAQ", href: "/#faq" },
+    { label: "Blog", href: "/blog" },
+    { label: "Contact", href: "/#contact" },
   ],
   services: [
     "Sites Web",

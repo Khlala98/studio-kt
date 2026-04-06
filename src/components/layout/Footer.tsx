@@ -87,6 +87,7 @@ function FooterInfo() {
   ];
 
   const pages = [
+    { label: "Blog", href: "/blog" },
     { label: "Mentions légales", href: "/mentions-legales" },
     { label: "Politique de confidentialité", href: "/politique-confidentialite" },
   ];
