@@ -88,6 +88,7 @@ function Logo() {
         width={36}
         height={36}
         className="h-9 w-9"
+        priority
       />
       <span className="flex items-baseline gap-1">
         <span className="font-playfair text-xl font-bold text-gold">KT</span>

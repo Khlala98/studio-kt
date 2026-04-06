@@ -1,5 +1,3 @@
-// TODO: Brancher Google Analytics 4 / Plausible / Matomo ici
-
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Playfair_Display, DM_Sans } from "next/font/google";
@@ -42,8 +40,25 @@ export const metadata: Metadata = {
     siteName: "Studio KT",
     locale: "fr_FR",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Studio KT — Sites internet professionnels",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Studio KT — Sites internet professionnels",
+    description:
+      "Sites vitrines modernes, livrés clé en main en 5 jours. Sans abonnement.",
+    images: ["/og-image.png"],
   },
 };
+
+const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
@@ -79,6 +94,15 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        {plausibleDomain && (
+          <Script
+            id="plausible"
+            strategy="afterInteractive"
+            defer
+            src="https://plausible.io/js/script.js"
+            data-domain={plausibleDomain}
+          />
+        )}
         <SkipToContent />
         <Navbar />
         <main id="content" className="flex-1">
