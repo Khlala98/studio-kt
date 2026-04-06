@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import Button from "@/components/ui/Button";
 
-// TODO: Brancher sur un backend (API route, Resend, Formspree, etc.)
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xojprjqk";
 
 interface ContactFormData {
   name: string;
@@ -25,16 +25,46 @@ const formulas = [
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ContactFormData>();
 
-  const onSubmit = (data: ContactFormData) => {
-    // TODO: Envoyer les données au backend
-    console.log("Contact form data:", data);
-    setSubmitted(true);
+  const onSubmit = async (data: ContactFormData) => {
+    setLoading(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          formula: data.formula,
+          message: data.message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        "L'envoi a échoué. Réessayez ou contactez-moi directement par email ou WhatsApp."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -102,14 +132,34 @@ export default function ContactForm() {
         />
       </FieldGroup>
 
+      {submitError && (
+        <div
+          className="flex items-start gap-2 rounded-lg border border-red-400/40 bg-red-400/10 p-3 text-sm text-red-300"
+          role="alert"
+        >
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <span>{submitError}</span>
+        </div>
+      )}
+
       <Button
         type="submit"
         variant="primary"
         className="w-full"
         data-track="contact_submit"
+        disabled={loading}
       >
-        <Send className="h-4 w-4" />
-        Envoyer ma demande
+        {loading ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Envoi en cours…
+          </>
+        ) : (
+          <>
+            <Send className="h-4 w-4" />
+            Envoyer ma demande
+          </>
+        )}
       </Button>
     </form>
   );
