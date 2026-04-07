@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog-posts";
+import { cityPages } from "@/data/city-pages";
 
 const BASE_URL = "https://studiokt.fr";
 
@@ -40,5 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...blogRoutes];
+  const cityRoutes: MetadataRoute.Sitemap = cityPages.map((page) => ({
+    url: `${BASE_URL}/${page.slug}`,
+    lastModified,
+    changeFrequency: "monthly",
+    priority: 0.9,
+  }));
+
+  return [...staticRoutes, ...cityRoutes, ...blogRoutes];
 }
