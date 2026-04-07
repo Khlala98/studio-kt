@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
@@ -10,6 +11,7 @@ interface Project {
   type: string;
   url: string;
   displayUrl: string;
+  image: string;
 }
 
 const projects: Project[] = [
@@ -18,12 +20,14 @@ const projects: Project[] = [
     type: "Site vitrine",
     url: "https://camille-duval-architecte.vercel.app",
     displayUrl: "camille-duval-architecte.vercel.app",
+    image: "/portfolio-camille.webp",
   },
   {
     name: "HK Clothing",
     type: "E-commerce",
     url: "https://hk-clothing-two.vercel.app",
     displayUrl: "hk-clothing-two.vercel.app",
+    image: "/portfolio-hk-1.webp",
   },
 ];
 
@@ -54,7 +58,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.15 }}
     >
-      <PortfolioBrowser url={project.displayUrl} />
+      <PortfolioBrowser url={project.displayUrl} image={project.image} name={project.name} />
       <div className="mt-4 flex items-start justify-between">
         <div>
           <h3 className="font-playfair text-lg font-bold text-white">
@@ -76,9 +80,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
-function PortfolioBrowser({ url }: { url: string }) {
+function PortfolioBrowser({ url, image, name }: { url: string; image: string; name: string }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-border-dark bg-navy-light shadow-lg transition-shadow duration-300 hover:shadow-xl">
+    <a
+      href={`https://${url}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block overflow-hidden rounded-xl border border-border-dark bg-navy-light shadow-lg transition-shadow duration-300 hover:shadow-xl"
+    >
       {/* Browser chrome */}
       <div className="flex items-center gap-2 border-b border-border-dark bg-navy px-4 py-3">
         <div className="flex gap-1.5">
@@ -91,31 +100,16 @@ function PortfolioBrowser({ url }: { url: string }) {
         </div>
       </div>
 
-      {/* Mock page content */}
-      <div className="p-5">
-        <div className="mb-4 flex items-center justify-between rounded-lg bg-navy/60 px-3 py-2">
-          <div className="h-2.5 w-14 rounded bg-gold/50" />
-          <div className="flex gap-2">
-            <div className="h-2 w-10 rounded bg-text-light/25" />
-            <div className="h-2 w-10 rounded bg-text-light/25" />
-            <div className="h-2 w-10 rounded bg-text-light/25" />
-          </div>
-        </div>
-        <div className="mb-4 rounded-lg bg-gradient-to-br from-navy-medium to-navy p-6">
-          <div className="mb-2 h-3 w-4/5 rounded bg-white/15" />
-          <div className="mb-1 h-2.5 w-3/5 rounded bg-white/10" />
-          <div className="mt-3 h-6 w-20 rounded bg-gold/60" />
-        </div>
-        <div className="grid grid-cols-3 gap-2">
-          {[1, 2, 3].map((n) => (
-            <div key={n} className="rounded-lg bg-navy/30 p-3">
-              <div className="mb-2 h-8 rounded bg-navy-medium/60" />
-              <div className="mb-1 h-1.5 w-full rounded bg-text-light/15" />
-              <div className="h-1.5 w-2/3 rounded bg-text-light/10" />
-            </div>
-          ))}
-        </div>
+      {/* Real screenshot */}
+      <div className="relative aspect-[16/10] w-full bg-navy">
+        <Image
+          src={image}
+          alt={`Aperçu du site ${name}`}
+          fill
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className="object-cover object-top"
+        />
       </div>
-    </div>
+    </a>
   );
 }
