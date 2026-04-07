@@ -40,21 +40,12 @@ export const metadata: Metadata = {
     siteName: "Studio KT",
     locale: "fr_FR",
     type: "website",
-    images: [
-      {
-        url: "/og-image.svg",
-        width: 1200,
-        height: 630,
-        alt: "Studio KT — Sites internet professionnels",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Studio KT — Sites internet professionnels",
     description:
       "Sites vitrines modernes, livrés clé en main en 5 jours. Sans abonnement.",
-    images: ["/og-image.svg"],
   },
 };
 
